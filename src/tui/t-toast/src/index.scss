@@ -1,0 +1,36 @@
+@import '../../style/_reset.scss';
+@import '../../style/_color.scss';
+@import '../../style/_calculate.scss';
+@import '../../style/_base.scss';
+@import '../../style/_layout.scss';
+
+$t-toast-font-style: $default-font;
+$t-toast-background-color: $b-3;
+$t-toast-font-color: #FFF;
+$t-toast-font-size: $big-font;
+
+.t-toast{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-family: $t-toast-font-style;
+	.body{
+		box-sizing: border-box;
+		position: absolute;
+		top: 33%;
+		left: 0;
+		right: 0;
+		width: 60%;
+		padding: .5rem;
+		margin: auto;
+		background-color: $t-toast-background-color;
+		border-radius: 3px;
+		.toast-text{
+			color: $t-toast-font-color;
+			font-size: $t-toast-font-size;
+		}
+	}
+}

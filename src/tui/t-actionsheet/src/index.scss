@@ -1,0 +1,43 @@
+@import '../../style/_reset.scss';
+@import '../../style/_color.scss';
+@import '../../style/_calculate.scss';
+@import '../../style/_base.scss';
+@import '../../style/_layout.scss';
+
+$t-action-sheet-font-style: $default-font;
+$t-ac-list-background-color: #e8e8e8;
+$t-ac-item-height: 2.5rem;
+$t-ac-item-font-size: $big-font;
+$t-ac-item-cancel-font-size: $big-font;
+$t-ac-item-background-color: $w-9;
+$t-ac-item-font-color: $b-8;
+$t-ac-item-cancel-font-color: $b-6;
+.t-actionsheet{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-family: $t-action-sheet-font-style;
+	.body{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		background-color: $t-ac-list-background-color;
+		.item{
+			height: $t-ac-item-height;
+			line-height: $t-ac-item-height;
+			background-color: $t-ac-item-background-color;
+			color: $t-ac-item-font-color;
+			font-size: $t-ac-item-font-size;
+		}
+		.cancel{
+			margin-top: 5px;
+			color: $t-ac-item-cancel-font-color;
+			font-size: $t-ac-item-cancel-font-size;
+		}
+	}
+}
