@@ -11,20 +11,20 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        '/DLMiddleware_by-controller': {
-          target: 'http://218.17.165.119:10045', //测试环境转发
+        '/huatai': {
+          target: 'http://180.166.172.126:8080', //测试环境转发
           changeOrigin: true,
           pathRewrite: {
-            '^/DLMiddleware_by-controller': '/DLMiddleware_by-controller'
+            '^/huatai': '/huatai'
           }
         }
     },
 
     // Various Dev Server settings
-    // host: 'localhost', // can be overwritten by process.env.HOST
-    host: '192.168.1.191',
+    host: '127.0.0.1', // can be overwritten by process.env.HOST
+    // host: '192.168.1.40',
     port: 8070, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: false,
+    autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-

@@ -101,11 +101,8 @@ export default {
     this.delay = this.interval
     // 保存初始数据长度
     this.startListLen = this.list.length
-    this.showList = [this.list[this.startListLen - 1], ...this.list, this.list[0]]
     // 复制第一张和最后一张
-    // this.list.push(this.list[0])
-    // this.list.unshift(this.list[this.startListLen - 1])
-
+    this.showList = [this.list[this.startListLen - 1], ...this.list, this.list[0]]
     this.$nextTick(() => {
       this.init()
     })

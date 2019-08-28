@@ -59,6 +59,18 @@ export default {
       })
     }
   },
+  watch: {
+    step (val, oldval) {
+      if (val !== oldval) {
+        this.updateStepLine();
+      }
+    },
+    success (val, oldval) {
+      if (val !== oldval) {
+        this.updateStepLine();
+      }
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

@@ -27,5 +27,6 @@ class Service {
     tempInt = flag ? tempInt.includes('-') ? tempInt : `-${tempInt}` : tempInt
     return `${tempInt}.${handle.split('.')[1]}`
   }
+  
 }
 export default new Service()

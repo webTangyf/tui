@@ -1,0 +1,18 @@
+$app-head-height: 44px;
+.layout--page{
+	box-sizing: border-box;
+	position: relative;
+	height: 100%;
+	padding-top: $app-head-height;
+	header{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: $app-head-height;
+	}
+	main{
+		box-sizing: border-box;
+		height: 100%;
+	}
+}

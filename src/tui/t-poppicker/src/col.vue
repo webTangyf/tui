@@ -131,10 +131,4 @@ export default {
 </script>
 <style lang="scss" scoped>
   @import './index.scss';
-  @import '../../style/_reset.scss';
-  @import '../../style/_color.scss';
-  @import '../../style/_calculate.scss';
-  @import '../../style/_base.scss';
-  @import '../../style/_layout.scss';
-  @import '../../style/_animate.scss';
 </style>

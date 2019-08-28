@@ -1,6 +1,6 @@
 <template>
   <div class="tCellPasge">
-    <t-cell :linkDirection="'right'"></t-cell>
+    <t-cell :linkDirection="'right'" :title="'title'" :value="'test'"></t-cell>
     <p>t-cell</p>
     <p>
       props: <br>

@@ -5,24 +5,9 @@ const directive = {
         updownHandle(el, Object.assign(options, { defaultColor: value.toString().replace(/('|")/g, '')}))
       },
       componentUpdated: function (el, { value = options.defaultColor || '#333' }) {
+        console.log(value)
         updownHandle(el, Object.assign(options, { defaultColor: value.toString().replace(/('|")/g, '')}))
       },
-    }),
-    Vue.directive('date', {
-      inserted: function (el, binding, vnode, oldVnode) {
-       dateHandle(el, binding, vnode)
-      },
-      componentUpdated: function (el, binding, vnode, oldVnode) {
-        dateHandle(el, binding, vnode)
-      }
-    })
-    Vue.directive('test', {
-      inserted: function (...args) {
-        console.log(args)
-      },
-      componentUpdated: function (...args) {
-        console.log(args)
-      }
     })
   }
 }

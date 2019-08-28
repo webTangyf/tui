@@ -16,7 +16,8 @@ import {tToast, tButton} from '@/tui'
 export default {
   name: 'tToastPage',
   components: {
-    't-button': tButton
+    't-button': tButton,
+    layoutPage
   },
   created () {
   },

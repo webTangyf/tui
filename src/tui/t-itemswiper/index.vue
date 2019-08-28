@@ -161,10 +161,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../style/_reset.scss';
-  @import '../style/_color.scss';
-  @import '../style/_calculate.scss';
-  @import '../style/_base.scss';
-  @import '../style/layout.scss';
   @import './index.scss';
 </style>

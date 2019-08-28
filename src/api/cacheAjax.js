@@ -1,12 +1,13 @@
 export default function ajaxCahche (axios, option) {
-
-  let { ajaxMap } = option
+  let {
+    ajaxMap
+  } = option
   let _activeDate = option.activeDate || 30 * 1000
   let _maxCacheSize = option.maxCacheSize || 15
   let handleJudge = option.handleJudge || handleJudgeDefault
   let handleIgnore = option.handleIgnore
   let handleGetParams = option.handleGetParams
-  
+
   // 缓存的map
   const resultCache = new Map()
 
@@ -26,15 +27,15 @@ export default function ajaxCahche (axios, option) {
       formatObject[_cacheConFig[key]] = {
         url: _cacheConFig[key],
         cachetype: 'baseurl',
-        cache: false,                         // 是否做缓存处理
-        publish: [],                          // 如果该接口更新了的话 需要去更新的接口
+        cache: false, // 是否做缓存处理
+        publish: [] // 如果该接口更新了的话 需要去更新的接口
       }
       url[key] = _cacheConFig[key]
     } else if (typeof _cacheConFig[key] === 'object') {
       formatObject[_cacheConFig[key]['url']] = Object.assign({
         cache: false,
         cachetype: 'baseurl',
-        publish: [],
+        publish: []
       }, _cacheConFig[key])
       url[key] = _cacheConFig[key]['url']
     } else {
@@ -47,7 +48,7 @@ export default function ajaxCahche (axios, option) {
 
   // 对外接口请求的api
   axiosWithCache.url = JSON.parse(JSON.stringify(url))
-  
+
   function axiosWithCache (...arg) {
     return axios(...arg)
   }
@@ -73,26 +74,31 @@ export default function ajaxCahche (axios, option) {
   }
 
   // 检查状态是否需要重新请求 不需要返回false 需要返回true
-  function checkCacheStatus ({ url, cachetype }, params) {
+  function checkCacheStatus ({
+    url,
+    cachetype
+  }, params) {
     if (cachetype === 'baseurl') {
       return !(
         resultCache.has(url) &&
         resultCache.get(url).timeStamp &&
         (new Date().getTime() - resultCache.get(url).timeStamp) < _activeDate
-      ) 
+      )
     } else if (cachetype === 'paramsurl') {
       // 对参数进行过滤处理
       return !(
         resultCache.has(`${url}${JSON.stringify(params)}`) &&
         resultCache.get(`${url}${JSON.stringify(params)}`).timeStamp &&
         (new Date().getTime() - resultCache.get(`${url}${JSON.stringify(params)}`).timeStamp) < _activeDate
-      ) 
+      )
     }
     return true
-  } 
+  }
 
   // 清除依赖于这个接口的接口的相关缓存
-  function clearWatchCatch ({ publish }) {
+  function clearWatchCatch ({
+    publish
+  }) {
     if (publish.length !== 0) {
       let publishLength = publish.length
       for (let i = 0; i < publishLength; i++) {
@@ -100,7 +106,7 @@ export default function ajaxCahche (axios, option) {
         if (_cacheConFig[ajaxUrl].cachetype === 'baseurl') {
           resultCache.delete(ajaxUrl)
         } else if (_cacheConFig[ajaxUrl].cachetype === 'paramsurl') {
-          let keys = [...resultCache.keys()] 
+          let keys = [...resultCache.keys()]
           keys.forEach(d => {
             if (d.includes(ajaxUrl)) {
               resultCache.delete(d)
@@ -116,24 +122,30 @@ export default function ajaxCahche (axios, option) {
   // 默认的判断本次请求是否成功的方式
   function handleJudgeDefault (data, cb) {
     if (data.retcode === '0000' || data.code === '0000') {
-      cb&&cb()
+      cb && cb()
     }
   }
 
   //  对原生的方法请求的结果进行处理
   async function nativePromiseHandle (nativeFunc, params) {
-    let [ cacheStr ] = params
-    try{
+    let [cacheStr] = params
+    try {
       let res = await nativeFunc(...params)
-      let { data, config } = res
-      if (typeof data === 'string'){
+      let {
+        data,
+        config
+      } = res
+      if (typeof data === 'string') {
         data = JSON.parse(data)
       }
       handleJudge(data, () => {
         let cacheOption = _cacheConFig[cacheStr]
         if (cacheOption.cache) {
           if (cacheOption.cachetype === 'baseurl') {
-            resultCache.set(cacheStr, {res, timeStamp: new Date().getTime()})
+            resultCache.set(cacheStr, {
+              res,
+              timeStamp: new Date().getTime()
+            })
           } else if (cacheOption.cachetype === 'paramsurl') {
             let handleParams = JSON.parse(JSON.stringify(config.params))
             let keys = Object.keys(handleParams)
@@ -142,7 +154,10 @@ export default function ajaxCahche (axios, option) {
                 delete handleParams[d]
               }
             })
-            resultCache.set(`${cacheStr}${JSON.stringify(handleParams)}`, {res, timeStamp: new Date().getTime()})
+            resultCache.set(`${cacheStr}${JSON.stringify(handleParams)}`, {
+              res,
+              timeStamp: new Date().getTime()
+            })
           }
           // 检查是否超出最大缓存数
           mapSizeCheck()
@@ -151,7 +166,7 @@ export default function ajaxCahche (axios, option) {
       })
       // 返回原始数据
       return res
-    } catch(e) {
+    } catch (e) {
       console.error(e)
     }
   }
@@ -180,7 +195,7 @@ export default function ajaxCahche (axios, option) {
 
   let cacheStr = cacheMethods.join(',')
 
-  // 注册相关方法 
+  // 注册相关方法
   for (let key in axios) {
     if (cacheStr.includes(key)) {
       // 正常缓存流程

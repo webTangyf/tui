@@ -5,7 +5,7 @@
     't-no-interval-up': borderFlag == 0 || borderFlag == 2,
     't-no-interval-down': borderFlag == 1 || borderFlag == 2,
   }]" @click="onClick">
-    <div class="cell-row row">
+    <div class="cell-row tui-row ">
       <div class="title">
         <slot>{{title}}</slot>
       </div>
@@ -117,10 +117,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-  @import '../style/_reset.scss';
-  @import '../style/_color.scss';
-  @import '../style/_calculate.scss';
-  @import '../style/_base.scss';
-  @import '../style/layout.scss';
   @import './index.scss';
 </style>
